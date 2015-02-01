@@ -1,6 +1,11 @@
 <?php
 
-include_once('configs.php');
+if (!isset($_POST['user_email']) || !isset($_POST['user_password'])) {
+  die("Please enter email and password");
+}
+
+$email = $_POST['user_email'];
+$password = $_POST['user_password'];
 
 $data = array(
   'checkCookiesEnabled' => 'true',
