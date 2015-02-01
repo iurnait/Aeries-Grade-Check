@@ -75,5 +75,5 @@ while (strpos($data, 'ctl00_MainContent_subGBS_DataDetails_ctl' . str_pad($row_n
   $row_num++;
 }
 
-echo json_encode($all_array);
+echo json_encode($all_array, JSON_PRETTY_PRINT);
 
