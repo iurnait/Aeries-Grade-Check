@@ -68,6 +68,7 @@ while (strpos($data, 'ctl00_MainContent_subGBS_DataDetails_ctl' . str_pad($row_n
     "Teacher" => $row_array[11],
     "Percent" => $row_array[13],
     "Mark" => $row_array[17],
+    "Missing Assignments" => $row_array[21],
     "Last Update" => $row_array[36]];
 
   $all_array[] = $info;
