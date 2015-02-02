@@ -5,12 +5,19 @@
     <title>Get Grades</title>
 </head>
 <body>
-<form method="post" action="get_overview.php">
+<form method="post" action="testing.php">
     Email:<br>
     <input type="email" name="user_email" id="user_email">
     <br>
     Password:<br>
     <input type="password" name="user_password" id="user_password">
+    <br>
+    Type:<br>
+    <select name="type" id="type">
+        <option value="classes">My Classes</option>
+        <option value="summary">Gradebook Summary</option>
+    </select>
+
     <br><br>
     <input type="submit" value="Submit">
 </form>

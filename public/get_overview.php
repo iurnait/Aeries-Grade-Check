@@ -4,6 +4,7 @@ if (!isset($_POST['user_email']) || !isset($_POST['user_password'])) {
   die("Please enter email and password");
 }
 
+/**** Login ****/
 $email = $_POST['user_email'];
 $password = $_POST['user_password'];
 
@@ -31,6 +32,7 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , 0);
 $data = curl_exec($ch);
 
+/**** Data Processing ****/
 if(!$data){
   die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
 }
@@ -76,6 +78,7 @@ while (strpos($data, 'ctl00_MainContent_subGBS_DataDetails_ctl' . str_pad($row_n
   $row_num++;
 }
 
+/**** Print out grade overview *****/
 echo "<pre>";
 echo json_encode($all_array, JSON_PRETTY_PRINT);
 echo "</pre>";
