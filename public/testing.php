@@ -93,16 +93,16 @@ $data = curl_exec($ch);
 
 $urls = array('classes' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookNames',
               'summary' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookSummaryData',
-              'initialize' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/InitializeApplication'/*,
+              'initialize' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/InitializeApplication',
               'class_summary' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookDetailedSummaryData',
-              'class_detail' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookDetailsData'*/
+              'class_detail' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookDetailsData'
 );
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_URL, $urls[$_POST['type']]);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36');
-curl_setopt($ch, CURLOPT_POST, 0);
-curl_setopt($ch, CURLOPT_HTTPHEADER, Array("Accept: application/json, text/javascript, */*; q=0.01",
+
+$header = Array("Accept: application/json, text/javascript, */*; q=0.01",
     "Accept-Encoding:gzip, deflate, sdch",
     "Accept-Language:en-US,en;q=0.8",
     "Connection:keep-alive",
@@ -110,7 +110,26 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, Array("Accept: application/json, text/javas
     "Host:my.iusd.org",
     "Referer:https://my.iusd.org/m/loginparent.html",
     "X-Requested-With:XMLHttpRequest"
-    ));
+);
+
+if ($_POST['type'] == 'class_summary') {
+    curl_setopt($ch, CURLOPT_POST, 1);
+    $payload = json_encode(array("gradebookNumber" => $_POST['gradebookNumber']));
+//    $header[] = 'Content-Length: ' . strlen($payload);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+} elseif ($_POST['type'] == 'class_detail') {
+    curl_setopt($ch, CURLOPT_POST, 1);
+    $payload = json_encode(array("gradebookNumber" => $_POST['gradebookNumber'],
+                                "requestedPage" => 1,  // TODO: not sure what these two actually do.
+                                "pageSize" => 12));
+//    $header[] = 'Content-Length: ' . strlen($payload);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+} else {
+    curl_setopt($ch, CURLOPT_POST, 0);
+
+}
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 curl_setopt($ch, CURLOPT_COOKIE, 1);
 curl_setopt($ch, CURLOPT_COOKIEFILE, "cookie.txt");
 curl_setopt($ch, CURLOPT_COOKIEJAR, "cookie.txt");
