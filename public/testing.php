@@ -114,14 +114,14 @@ $header = Array("Accept: application/json, text/javascript, */*; q=0.01",
 
 if ($_POST['type'] == 'class_summary') {
     curl_setopt($ch, CURLOPT_POST, 1);
-    $payload = json_encode(array("gradebookNumber" => $_POST['gradebookNumber']));
+    $payload = json_encode(array("gradebookNumber" => $_POST['gradebook_number']));
 //    $header[] = 'Content-Length: ' . strlen($payload);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 } elseif ($_POST['type'] == 'class_detail') {
     curl_setopt($ch, CURLOPT_POST, 1);
-    $payload = json_encode(array("gradebookNumber" => $_POST['gradebookNumber'],
-                                "requestedPage" => 1,  // TODO: not sure what these two actually do.
-                                "pageSize" => 12));
+    $payload = json_encode(array("gradebookNumber" => $_POST['gradebook_number'],
+                                "requestedPage" => 1,
+                                "pageSize" => 99));
 //    $header[] = 'Content-Length: ' . strlen($payload);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 } else {
