@@ -89,7 +89,7 @@ curl_setopt($ch, CURLOPT_COOKIEFILE, "cookie.txt");
 curl_setopt($ch, CURLOPT_COOKIEJAR, "cookie.txt");
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , 0);
-$data = curl_exec($ch);
+curl_exec($ch);
 
 $urls = array('classes' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookNames',
               'summary' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookSummaryData',
@@ -137,6 +137,10 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , 1);
 $data = curl_exec($ch);
 
-echo "<pre>";
-echo _format_json($data);
-echo "</pre>";
+if (isset($_POST['submit'])) {
+    echo "<pre>";
+    echo _format_json($data);
+    echo "</pre>";
+} else {
+    echo $data;
+}
