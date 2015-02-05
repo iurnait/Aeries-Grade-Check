@@ -95,7 +95,8 @@ $urls = array('classes' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGrade
               'summary' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookSummaryData',
               'initialize' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/InitializeApplication',
               'class_summary' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookDetailedSummaryData',
-              'class_detail' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookDetailsData'
+              'class_detail' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/GetGradebookDetailsData',
+              'is_logged_in' => 'https://my.iusd.org/m/api/MobileWebAPI.asmx/IsUserLoggedIn'
 );
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
